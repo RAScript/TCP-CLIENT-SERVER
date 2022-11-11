@@ -77,5 +77,5 @@ int main(int argc, char *argv[]) {
    return 0;
 }
 
-//This is a TCP client. Enter "CTRL+C" to exit
+//This is a TCP client. Enter "CTRL+C" to exit.
 
