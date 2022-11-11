@@ -19,10 +19,9 @@ int main(int argc, char *argv[]) {
     hints.ai_family = AF_INET;
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_flags = AI_PASSIVE;
-
+    
     struct addrinfo *bind_address;
     getaddrinfo(0, "8080", &hints, &bind_address);
-
 
     SOCKET listen_socket;
     listen_socket = socket(bind_address->ai_family, bind_address->ai_socktype, bind_address->ai_protocol);
@@ -50,7 +49,7 @@ int main(int argc, char *argv[]) {
     SOCKET max_socket = listen_socket;
     
     while(1) { 
-
+        
        fd_set reads;
        reads = master;
        int selecting = select(max_socket+1, &reads, 0, 0, 0);
@@ -83,7 +82,7 @@ int main(int argc, char *argv[]) {
                  getnameinfo((struct sockaddr *) &client_address, client_length, address_buf, sizeof(address_buf), service_buf, sizeof(service_buf), NI_NUMERICHOST);
                  printf("There is a new connection from IP: %s.\n", address_buf);
              }
-          
+              
              else {
                  int bytes_receive = recv(x, read, sizeof(read), 0);
                  if (bytes_receive < 1) {
@@ -108,4 +107,5 @@ int main(int argc, char *argv[]) {
 
 }
    
-//To exit the programme, enter "CTRL+C".
+//To exit the programme, enter "CTRL+C"
+//Compile this programme with the command: "gcc TCP_server.c -o TCP_server -lws2_32" Make sure you remove the quotation marks, you can change the name of this programme to your choosing.
